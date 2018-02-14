@@ -1,0 +1,43 @@
+<!-- Posting new puppies -->
+<div class="row">
+  <div class="col-sm-6 col-sm-offset-3">
+    <form method="POST" action="/puppies">
+		<fieldset>
+		  <legend>Post Puppy</legend>
+
+		  <!-- Puppy's Name -->
+		  <div class="form-group">
+		    <label for="review-title">Puppy's Name</label><br>
+		    <input class="form-control" id="puppy-name" type="text" name="title" value="{{puppy.name}}"/>
+		  </div>
+
+		  <!-- Puppy's Gender -->
+		  <div class="form-group">
+			  <label for="puppy-gender">Puppy's Gender:</label><br>
+			  <select class="form-control" id="puppy-gender">
+			    <option>Male</option>
+			    <option>Female</option>
+			  </select>
+		</div>
+
+		  <!-- Puppy's Breed -->
+		  <!-- Puppy's Date of Birth -->
+		  <!-- Puppy's Images minimum 1 -->
+		  
+
+		  <!-- DESCRIPTION -->
+		  <div class="form-group">
+		    <label for="puppy-description">Description</label><br>
+		    <textarea class="form-control" id="puppy-description" name="description" rows="10" />{{puppy.description}}</textarea>
+		  </div>
+
+
+		</fieldset>
+      <!-- BUTTON -->
+      <div class="form-group">
+        <button class="btn btn-primary" type="submit">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
+
