@@ -1,13 +1,16 @@
 const path = require('path');
 const express = require('express');
-// const logger = require('morgan');
+const logger = require('morgan');
 const bodyParser = require('body-parser');
-// const cookieParser = require('cookie-parser');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const expValidator = require('express-validator');
+const flash = require('connect-flash');
 const hbs = require('express-handlebars');
 const port = process.env.PORT || 3000;
 const app = express();
 
-// template engine setup
+// Template Engine setup
 app.engine('hbs', hbs({
   extname: 'hbs',
   defaultLayout: 'main',
@@ -16,37 +19,65 @@ app.engine('hbs', hbs({
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
-
-// app.use(logger('dev'));
+// Logger
+app.use(logger('dev'));
+// Body Parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-// app.use(cookieParser());
+app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+// Connect Flash
+app.use(flash());
+// Handle Sessions
+app.use(session({
+  secret: 'secret',
+  saveUninitialized: true,
+  resave: true
+}));
+// Express Validator
+app.use(expValidator({
+  errorFormatter: (param, msg, value) => {
+    let namespace = param.split('.')
+    , root = namespace.shift()
+    , formParam = root;
 
-// Routes
-// HOME
-app.get('/', (req, res) => {
-  Puppy.find({}).then((puppies) => {
-    res.render('home', {puppies})
-  }).catch((err) => {
-    console.log('Failed to load database:', err);
-  })
-})
+    while (namespace.length) {
+      formParam += '[' + namespace.shift() + ']';
+    }
+    return {
+      param: formParam,
+      msg: msg,
+      value: value
+    }
+  }
+}));
 
-// NEW
-app.get('/puppies/new', (req, res) => {
-  res.render('puppies-new', {});
+
+// Global Variables
+app.use((req, res, next) => {
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  res.locals.error = req.flash('error');
+  next();
 });
 
-// CREATE
-app.post('/puppies', (req, res) => {
-  Puppies.create(req.body).then((puppy)=> {
-    console.log(puppy)
-    res.redirect('/puppies/' + puppy._id)
-  }).catch((err) => {
-    console.log('Unable to save into the database', err)
-  });
-})
+
+/***********
+    Routes - Resources
+***********/
+const routes = require('./routes/index');
+const puppies = require('./routes/puppies');
+// const genres = require('./routes/genres');
+const users = require('./routes/users');
+
+// Routes - Middleware
+app.use('/', routes);
+app.use('/puppies', puppies);
+// app.use('/genres', genres);
+app.use('/users', users);
+
+
+
 
 
 
