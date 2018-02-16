@@ -67,13 +67,13 @@ app.use((req, res, next) => {
 ***********/
 const routes = require('./routes/index');
 const puppies = require('./routes/puppies');
-// const genres = require('./routes/genres');
+const genres = require('./routes/genres');
 const users = require('./routes/users');
 
 // Routes - Middleware
 app.use('/', routes);
 app.use('/puppies', puppies);
-// app.use('/genres', genres);
+app.use('/genres', genres);
 app.use('/users', users);
 
 
