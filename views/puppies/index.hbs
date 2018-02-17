@@ -1,1 +1,14 @@
-<h1>Puppies</h1>
+<h1>Puppies
+<a href="/puppies/new" class="btn btn-success pull-right">Add Puppy</a>
+</h1>
+
+<div class="row">
+  <!-- loop through the User's puppies -->
+  {{#each puppies}}
+  <div class="col-md-4 puppies">
+    <a href="/puppies/details/{{this._id}}"><img class="img-thumbnail" src={{this.path}}></a>
+    <h4 class="puppy-name text-center">{{this.name}}</h4>
+    <p class="puppy-breed text-center">{{this.breed}}</p>
+  </div>
+  {{/each}}
+</div>

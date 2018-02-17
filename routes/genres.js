@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 // Add Mongoose Database connection
 
-
+// TODO: conventional RESTful routing naming
 
 router.get('/', (req, res, next) => {
   res.render('genres/index')

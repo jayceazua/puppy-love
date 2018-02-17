@@ -11,12 +11,16 @@ let puppySchema = new Schema({
   breed: {
     type: String
   },
-  fixed: {
-    type: Boolean
-  },
   dateOfBirth: {
     type: Date,
     default: Date.now
+  },
+  // Add an image file key
+  path: {
+    type: String
+  },
+  originalFileName: {
+    type: String
   }
 });
 

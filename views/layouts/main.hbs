@@ -13,11 +13,38 @@
 
 
     {{> header}}
+      <!-- Sidebar -->
+      <div class="container">
+        <div class="row">
 
-    <div class="container">
-      {{{body}}}
-    </div>
+          <!-- Sidebar Menu -->
+          <div class="col-md-3">
+            <ul class="list-group">
+              <li class="list-group-item"><a href="/puppies">View Puppies</a></li>
+              <!-- <li class="list-group-item"><a href="/genres">View Genres</a></li> -->
+            </ul>
+          </div>
+          <!-- End of Sidebar Menu -->
 
+          <div class="col-md-9">
+            <!-- Flash Messages -->
+            {{#if success_msg}}
+            <div class="alert alert-success">
+              {{success_msg}}
+            </div>
+            {{/if}}
+            {{#if error_msg}}
+            <div class="alert alert-danger">
+              {{error_msg}}
+            </div>
+            {{/if}} <!-- End of Flash Messages -->
+
+            <!-- Body of the rest of the application -->
+              {{{body}}}
+
+            </div>
+          </div>
+        </div> <!-- End of Sidebar -->
     {{> footer}}
 <!-- jQuery CDN -->
 <script

@@ -1,0 +1,20 @@
+.puppies img{
+  width: 300px;
+  height: 200px;
+  border: white 2px  solid;
+}
+
+.puppies img:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.puppies h4 {
+  margin-botton: 0;
+}
+
+footer {
+  margin-top: 40px;
+  border-top: #333 solid 1px;
+  padding-top: 20px;
+}

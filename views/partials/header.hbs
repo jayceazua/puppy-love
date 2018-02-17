@@ -12,32 +12,15 @@
         <a class="navbar-brand" href="/">Puppy Love</a>
       </div>
 
+      <!-- Navbar side menu -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
         <ul class="nav navbar-nav navbar-right">
           <li><a href="/users/register">Register</a></li>
           <li><a href="/users/login">Login</a></li>
         </ul>
       </div>
+      <!-- End of Navbar -->
 
     </div>
   </nav>
 </header>
-<div class="container">
-  <div class="row">
-    <div class="col-md-3">
-      <ul class="list-group">
-        <li class="list-group-item"><a href="/puppies">View Puppies</a></li>
-        <li class="list-group-item"><a href="/puppies/new">Post Puppy</a></li>
-      </ul>
-    </div>
-    <div class="col-md-9">
-      {{#if success_msg}}
-      <div class="alert alert-success">
-        {{success_msg}}
-      </div>
-      {{/if}}
-      {{#if error_msg}}
-      <div class="alert alert-danger">
-        {{error_msg}}
-      </div>
-      {{/if}}

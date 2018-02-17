@@ -9,6 +9,8 @@ const flash = require('connect-flash');
 const hbs = require('express-handlebars');
 const port = process.env.PORT || 3000;
 const app = express();
+// Database Connection
+require('./db');
 
 // Template Engine setup
 app.engine('hbs', hbs({
@@ -21,19 +23,23 @@ app.set('view engine', 'hbs');
 
 // Logger
 app.use(logger('dev'));
+
 // Body Parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
 // Connect Flash
 app.use(flash());
+
 // Handle Sessions
 app.use(session({
   secret: 'secret',
   saveUninitialized: true,
   resave: true
 }));
+
 // Express Validator
 app.use(expValidator({
   errorFormatter: (param, msg, value) => {
@@ -75,10 +81,6 @@ app.use('/', routes);
 app.use('/puppies', puppies);
 app.use('/genres', genres);
 app.use('/users', users);
-
-
-
-
 
 
 
