@@ -5,10 +5,24 @@
 <div class="row">
   <!-- loop through the User's puppies -->
   {{#each puppies}}
-  <div class="col-md-4 puppies">
-    <a href="/puppies/details/{{this._id}}"><img class="img-thumbnail" src={{this.path}}></a>
-    <h4 class="puppy-name text-center">{{this.name}}</h4>
-    <p class="puppy-breed text-center">{{this.breed}}</p>
-  </div>
+
+    <div class="col-md-4">
+      <div class="card">
+        <img class="" src={{this.path}} style="width:100%">
+        <h1 class="">{{this.name}}</h1>
+        <p class="title">{{this.breed}}Breed</p>
+        <p>{{this.age}}</p>
+        <!-- Social Media Contact -->
+      <div style="margin: 24px 0">
+        <a href="#"><i class="fa fa-instagram"></i></a>
+        <a href="#"><i class="fa fa-twitter"></i></a>
+        <a href="#"><i class="fa fa-snapchat"></i></a>
+        <a href="#"><i class="fa fa-facebook"></i></a>
+      </div>
+
+      <p><a href="/puppies/{{this._id}}"><button>Contact</button></a></p>
+      </div>
+    </div>
+
   {{/each}}
 </div>

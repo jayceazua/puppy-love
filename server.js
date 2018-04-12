@@ -20,6 +20,7 @@ app.engine('hbs', hbs({
 }));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Logger
 app.use(logger('dev'));
@@ -28,7 +29,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+
 
 // Connect Flash
 app.use(flash());
@@ -73,14 +74,12 @@ app.use((req, res, next) => {
 ***********/
 const routes = require('./routes/index');
 const puppies = require('./routes/puppies');
-const genres = require('./routes/genres');
-const users = require('./routes/users');
+
 
 // Routes - Middleware
 app.use('/', routes);
 app.use('/puppies', puppies);
-app.use('/genres', genres);
-app.use('/users', users);
+
 
 
 

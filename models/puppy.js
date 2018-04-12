@@ -11,6 +11,9 @@ let puppySchema = new Schema({
   breed: {
     type: String
   },
+  age: {
+    type: Number
+  },
   dateOfBirth: {
     type: Date,
     default: Date.now
