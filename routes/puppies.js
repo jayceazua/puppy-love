@@ -71,7 +71,7 @@ router.get('/:id', (req, res) => {
 });
 
 // EDIT
-app.get('/:id/edit', (req, res) => {
+router.get('/:id/edit', (req, res) => {
     Puppy.findById(req.params.id).then((puppy) => {
         res.render('puppies/edit', {
             puppy
@@ -81,14 +81,14 @@ app.get('/:id/edit', (req, res) => {
     })
 });
 // UPDATE
-app.put('/:id', (req, res) => {
+router.put('/:id', (req, res) => {
     Puppy.findById(req.params.id).then((puppy) => {
         console.log(puppy)
     })
 });
 
 // DELETE
-app.delete('/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
     Puppy.findById(req.params.id).then((puppy) => {
         console.log(puppy)
     })
