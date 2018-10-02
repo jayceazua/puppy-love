@@ -5,6 +5,6 @@ const db = mongoose.connection;
 let dbUri = process.env.MONGODB_URI || 'mongodb://localhost/PuppyLoveApp';
 
 mongoose.Promise = global.Promise;
-mongoose.connect(dbUri);
+mongoose.connect(dbUri, { useNewUrlParser: true });
 db.on('error', console.error.bind(console, 'connection error:'))
 db.once('open', () => {console.log('Mongo Database connected!')});
