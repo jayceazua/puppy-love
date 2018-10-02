@@ -74,13 +74,26 @@ app.use((req, res, next) => {
 ***********/
 const routes = require('./routes/index');
 const puppies = require('./routes/puppies');
-
+require('./routes/users')(app);
 
 // Routes - Middleware
 app.use('/', routes);
 app.use('/puppies', puppies);
 
 
+let checkAuth = (req, res, next) => {
+    if (typeof req.cookies.nToken === 'undefined' || req.cookies.nToken === null) {
+        req.user = null;
+    } else {
+        let token = req.cookies.nToken;
+        let decodedToken = jwt.decode(token, {complete: true}) || {};
+        req.user = decodedToken.payload;
+    }
+
+    next();
+};
+
+app.use(checkAuth);
 
 
 // Server setup
