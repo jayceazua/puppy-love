@@ -6,7 +6,7 @@ const Puppy = require('../models/puppy');
 
 
 // INDEX
-router.get('', (req, res, next) => {
+router.get('/puppies', (req, res, next) => {
     // populate all of the User's puppies posted here
     Puppy.find({}).then((puppies) => {
         res.render('puppies/index', {
@@ -18,13 +18,13 @@ router.get('', (req, res, next) => {
 })
 
 // NEW
-router.get('/new', (req, res, next) => {
+router.get('/puppies/new', (req, res, next) => {
     // fetch the breeds from the database?
     res.render('puppies/new')
 })
 
 // CREATE
-router.post('', upload.single('image'), (req, res, next) => {
+router.post('/puppies', upload.single('image'), (req, res, next) => {
     const puppy = new Puppy(req.body);
     //check file upload
     var imageName
@@ -60,7 +60,7 @@ router.post('', upload.single('image'), (req, res, next) => {
 });
 
 // SHOW
-router.get('/:id', (req, res) => {
+router.get('/puppies/:id', (req, res) => {
     Puppy.findById(req.params.id).then((puppy) => {
         res.render('puppies/show', {
             puppy
@@ -71,7 +71,7 @@ router.get('/:id', (req, res) => {
 });
 
 // EDIT
-router.get('/:id/edit', (req, res) => {
+router.get('/puppies/:id/edit', (req, res) => {
     Puppy.findById(req.params.id).then((puppy) => {
         res.render('puppies/edit', {
             puppy
@@ -81,14 +81,14 @@ router.get('/:id/edit', (req, res) => {
     })
 });
 // UPDATE
-router.put('/:id', (req, res) => {
+router.put('/puppies/:id', (req, res) => {
     Puppy.findById(req.params.id).then((puppy) => {
         console.log(puppy)
     })
 });
 
 // DELETE
-router.delete('/:id', (req, res) => {
+router.delete('/puppies/:id', (req, res) => {
     Puppy.findById(req.params.id).then((puppy) => {
         console.log(puppy)
     })

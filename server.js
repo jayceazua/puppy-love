@@ -1,7 +1,6 @@
 const path = require('path');
 const express = require('express');
 const logger = require('morgan');
-const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const expValidator = require('express-validator');
@@ -26,8 +25,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(logger('dev'));
 
 // Body Parser
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.json());
+app.use(express.urlencoded({
+  extended: false
+}));
 app.use(cookieParser());
 
 
@@ -78,7 +79,7 @@ require('./routes/users')(app);
 
 // Routes - Middleware
 app.use('/', routes);
-app.use('/puppies', puppies);
+app.use(puppies);
 
 
 let checkAuth = (req, res, next) => {
