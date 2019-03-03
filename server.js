@@ -81,23 +81,41 @@ require('./routes/users')(app);
 app.use('/', routes);
 app.use(puppies);
 
+// SEARCH
+const Puppy = require('./models/puppy');
+app.get('/search', async (req, res) => {
+  const term = new RegExp(req.query.term);
+  Puppy.find({
+      $or: [{
+          'name': term
+        },
+        {
+          'breed': term
+        }
+      ]
+    })
+    .then((results) => {
+      res.redirect('/puppies')
+      });
+  })
 
-let checkAuth = (req, res, next) => {
-    if (typeof req.cookies.nToken === 'undefined' || req.cookies.nToken === null) {
-        req.user = null;
-    } else {
-        let token = req.cookies.nToken;
-        let decodedToken = jwt.decode(token, {complete: true}) || {};
-        req.user = decodedToken.payload;
-    }
 
-    next();
-};
+// let checkAuth = (req, res, next) => {
+//     if (typeof req.cookies.nToken === 'undefined' || req.cookies.nToken === null) {
+//         req.user = null;
+//     } else {
+//         let token = req.cookies.nToken;
+//         let decodedToken = jwt.decode(token, {complete: true}) || {};
+//         req.user = decodedToken.payload;
+//     }
 
-app.use(checkAuth);
+//     next();
+// };
+
+// app.use(checkAuth);
 
 
 // Server setup
 app.listen(port, () => {
   console.log('Server is listening on port: ' + port);
-});
+})

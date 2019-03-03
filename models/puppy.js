@@ -14,10 +14,6 @@ let puppySchema = new Schema({
   age: {
     type: Number
   },
-  dateOfBirth: {
-    type: Date,
-    default: Date.now
-  },
   // Add an image file key
   path: {
     type: String
