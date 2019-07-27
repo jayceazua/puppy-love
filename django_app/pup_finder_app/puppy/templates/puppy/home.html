@@ -1,0 +1,11 @@
+{% extends 'puppy/base.html' %}
+
+{% block content %}
+
+  {% for puppy in puppies %}
+    <h1>{{ puppy.title }}</h1>
+    <p>By {{ puppy.owner }} on {{ puppy.date_posted }} </p>
+    <p>{{ puppy.description }}</p>
+  {% endfor %}
+
+{% endblock content %}
